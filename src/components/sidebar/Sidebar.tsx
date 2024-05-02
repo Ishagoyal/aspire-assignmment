@@ -5,31 +5,34 @@ import aspireLogo from "../../assets/aspireLogo.svg";
 import { useLocation } from "react-router-dom";
 import HomeIcon from "../../assets/HomeIcon";
 import PaymentsIcon from "../../assets/PaymentsIcon";
+import CardIcon from "../../assets/CardIcon";
+import CreditIcon from "../../assets/CreditIcon";
+import SettingsIcon from "../../assets/SettingsIcon";
 
 export const sideBarArray = [
   {
     title: "Home",
-    // icon: <HomeIcon />,
+    icon: <HomeIcon color="#01D167" />,
     link: "/home",
   },
   {
     title: "Cards",
-    // icon: cardLogo,
+    icon: <CardIcon color="#ffffff" />,
     link: "/cards",
   },
   {
     title: "Payments",
-    // icon: paymentsLogo,
+    icon: <PaymentsIcon color="#ffffff" />,
     link: "/payments",
   },
   {
     title: "Credit",
-    // icon: creditLogo,
+    icon: <CreditIcon color="#ffffff" />,
     link: "/credit",
   },
   {
     title: "Settings",
-    // icon: settingsLogo,
+    icon: <SettingsIcon color="#ffffff" />,
     link: "/settings",
   },
 ];
@@ -55,16 +58,16 @@ const Sidebar: React.FC = () => {
               onClick={() => setActiveIndex(index)}
             >
               <ListItem
-                className={`pl-8 text-base flex align-baseline hover:bg-[#009DFF1A] hover:cursor-pointer `}
+                className={`text-base flex align-baseline hover:bg-[#009DFF1A] hover:cursor-pointer `}
               >
-                <ListItemIcon>
-                  <PaymentsIcon
-                    color={activeIndex === index ? "#01D167" : "#ffffff"}
-                  />
+                <ListItemIcon className="pl-9">
+                  {React.cloneElement(sidebarContent.icon, {
+                    color: activeIndex === index ? "#01D167" : "#ffffff",
+                  })}
                 </ListItemIcon>
                 <ListItemText
                   primary={sidebarContent.title}
-                  className={`pl-4  ${
+                  className={` pl-4 ${
                     activeIndex === index
                       ? "text-active !font-bold"
                       : "text-white"
