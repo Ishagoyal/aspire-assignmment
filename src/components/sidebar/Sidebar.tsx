@@ -1,42 +1,44 @@
-import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import React, { useState } from "react";
+import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import aspireLogo from "../../assets/aspireLogo.svg";
-import settingsLogo from "../../assets/account.svg";
-import cardLogo from "../../assets/card.svg";
-import creditLogo from "../../assets/credit.svg";
-import paymentsLogo from "../../assets/payments.svg";
-import homeLogo from "../../assets/home.svg";
+import { useLocation } from "react-router-dom";
+import HomeIcon from "../../assets/HomeIcon";
+import PaymentsIcon from "../../assets/PaymentsIcon";
 
-const sideBarArray = [
+export const sideBarArray = [
   {
     title: "Home",
-    icon: homeLogo,
+    // icon: <HomeIcon />,
+    link: "/home",
   },
   {
     title: "Cards",
-    icon: cardLogo,
+    // icon: cardLogo,
+    link: "/cards",
   },
   {
     title: "Payments",
-    icon: paymentsLogo,
+    // icon: paymentsLogo,
+    link: "/payments",
   },
   {
     title: "Credit",
-    icon: creditLogo,
+    // icon: creditLogo,
+    link: "/credit",
   },
   {
     title: "Settings",
-    icon: settingsLogo,
+    // icon: settingsLogo,
+    link: "/settings",
   },
 ];
 
 const Sidebar: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const location = useLocation();
+  const activeRoute = location.pathname;
+
   return (
     <div className="h-full min-h-screen w-80 bg-dark-blue text-white">
       <img src={aspireLogo} className="logo ml-12 pt-12" />
@@ -45,17 +47,31 @@ const Sidebar: React.FC = () => {
       </div>
       <div className="pt-20">
         <List component="nav" className="flex flex-col gap-[60px]">
-          {" "}
-          {sideBarArray.map((sidebarContent) => (
-            <ListItem
-              className="pl-8 text-base flex align-baseline hover:bg-[#2d83cc] hover:cursor-pointer"
+          {sideBarArray.map((sidebarContent, index) => (
+            <NavLink
+              to={sidebarContent.link}
               key={sidebarContent.title}
+              className={({ isActive }) => (isActive ? "bg-[#009DFF1A]" : "")}
+              onClick={() => setActiveIndex(index)}
             >
-              <ListItemIcon>
-                <img src={sidebarContent.icon} className="logo ml-12" />
-              </ListItemIcon>
-              <ListItemText primary={sidebarContent.title} className="pl-4" />
-            </ListItem>
+              <ListItem
+                className={`pl-8 text-base flex align-baseline hover:bg-[#009DFF1A] hover:cursor-pointer `}
+              >
+                <ListItemIcon>
+                  <PaymentsIcon
+                    color={activeIndex === index ? "#01D167" : "#ffffff"}
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  primary={sidebarContent.title}
+                  className={`pl-4  ${
+                    activeIndex === index
+                      ? "text-active !font-bold"
+                      : "text-white"
+                  }`}
+                />
+              </ListItem>
+            </NavLink>
           ))}
         </List>
       </div>
