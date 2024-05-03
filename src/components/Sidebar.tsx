@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import aspireLogo from "../assets/aspireLogo.svg";
 import HomeIcon from "../assets/HomeIcon";
 import PaymentsIcon from "../assets/PaymentsIcon";
@@ -10,26 +10,31 @@ import SettingsIcon from "../assets/SettingsIcon";
 
 export const sideBarArray = [
   {
+    id: "home",
     title: "Home",
-    icon: <HomeIcon color="#01D167" />,
+    icon: <HomeIcon color="#ffffff" />,
     link: "/home",
   },
   {
+    id: "cards",
     title: "Cards",
     icon: <CardIcon color="#ffffff" />,
     link: "/cards",
   },
   {
+    id: "payments",
     title: "Payments",
     icon: <PaymentsIcon color="#ffffff" />,
     link: "/payments",
   },
   {
+    id: "credit",
     title: "Credit",
     icon: <CreditIcon color="#ffffff" />,
     link: "/credit",
   },
   {
+    id: "settings",
     title: "Settings",
     icon: <SettingsIcon color="#ffffff" />,
     link: "/settings",
@@ -37,7 +42,15 @@ export const sideBarArray = [
 ];
 
 const Sidebar: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate(`${location.pathname}`);
+    const pathnameWithoutSlash = () => location.pathname.replace(/^\//, "");
+    setActiveTab(pathnameWithoutSlash);
+  }, []);
 
   return (
     <div className=" w-[23%] bg-dark-blue text-white">
@@ -47,25 +60,26 @@ const Sidebar: React.FC = () => {
       </div>
       <div className="pt-20">
         <List component="nav" className="flex flex-col gap-[60px]">
-          {sideBarArray.map((sidebarContent, index) => (
+          {sideBarArray.map((sidebarContent) => (
             <NavLink
               to={sidebarContent.link}
               key={sidebarContent.title}
               className={({ isActive }) => (isActive ? "bg-[#009DFF1A]" : "")}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => setActiveTab(sidebarContent.id)}
             >
               <ListItem
                 className={`text-base flex align-baseline hover:bg-[#009DFF1A] hover:cursor-pointer `}
               >
                 <ListItemIcon className="pl-9">
                   {React.cloneElement(sidebarContent.icon, {
-                    color: activeIndex === index ? "#01D167" : "#ffffff",
+                    color:
+                      activeTab === sidebarContent.id ? "#01D167" : "#ffffff",
                   })}
                 </ListItemIcon>
                 <ListItemText
                   primary={sidebarContent.title}
                   className={` pl-4 ${
-                    activeIndex === index
+                    activeTab === sidebarContent.id
                       ? "text-active !font-bold"
                       : "text-white"
                   }`}
