@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import aspireLogo from "../../assets/aspireLogo.svg";
-import { useLocation } from "react-router-dom";
 import HomeIcon from "../../assets/HomeIcon";
 import PaymentsIcon from "../../assets/PaymentsIcon";
 import CardIcon from "../../assets/CardIcon";
@@ -39,11 +38,9 @@ export const sideBarArray = [
 
 const Sidebar: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const location = useLocation();
-  const activeRoute = location.pathname;
 
   return (
-    <div className="h-full min-h-screen w-80 bg-dark-blue text-white">
+    <div className="h-full min-h-screen w-!80 bg-dark-blue text-white">
       <img src={aspireLogo} className="logo ml-12 pt-12" />
       <div className="ml-12 font-sans text-white opacity-30 text-[15px] pt-5">
         Trusted way of banking for 3,000+ SMEs and startups in Singapore

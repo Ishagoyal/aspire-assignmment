@@ -12,8 +12,7 @@ export default {
         sans: ["Inter", "sans-serif"], // Assuming 'Inter' is the font used
       },
       boxShadow: {
-        custom:
-          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)", // Custom shadow for cards or elements
+        "custom-gray": "0 4px 8px rgba(0, 0, 0, 0.1)",
       },
     },
   },
