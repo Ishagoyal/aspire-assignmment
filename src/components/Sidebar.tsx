@@ -42,14 +42,16 @@ export const sideBarArray = [
 ];
 
 const Sidebar: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("home");
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     navigate(`${location.pathname}`);
-    const pathnameWithoutSlash = () => location.pathname.replace(/^\//, "");
-    setActiveTab(pathnameWithoutSlash);
+    const pathnameWithoutSlash = location.pathname.replace(/^\//, "");
+    if (pathnameWithoutSlash) {
+      setActiveTab(pathnameWithoutSlash);
+    }
   }, []);
 
   return (
