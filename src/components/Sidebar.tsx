@@ -40,7 +40,7 @@ const Sidebar: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="h-full min-h-screen w-!80 bg-dark-blue text-white">
+    <div className=" w-[23%] bg-dark-blue text-white">
       <img src={aspireLogo} className="logo ml-12 pt-12" />
       <div className="ml-12 font-sans text-white opacity-30 text-[15px] pt-5">
         Trusted way of banking for 3,000+ SMEs and startups in Singapore

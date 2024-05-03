@@ -382,7 +382,7 @@ const renderTabs = () => {
 
 function Cards() {
   return (
-    <div className="w-full p-[60px]">
+    <div className="p-[60px]">
       <div>{renderHeader()}</div>
       <div className="pt-[34px]">{renderTabs()}</div>
     </div>

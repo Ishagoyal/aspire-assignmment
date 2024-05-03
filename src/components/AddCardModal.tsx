@@ -7,6 +7,7 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   const [cardHolderName, setCardHolderName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
+  const [isCardHolderNameValid, setIsCardHolderNameValid] = useState(true);
 
   // Function to generate random card number
   const generateCardNumber = () => {
@@ -36,8 +37,21 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     }
   }, [isOpen]);
 
+  const handleCardHolderNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = event.target.value;
+    setCardHolderName(value);
+    // Simple validation: check if the name is not empty
+    setIsCardHolderNameValid(value.trim() !== "");
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!isCardHolderNameValid) {
+      // Prevent form submission if the card holder name is not valid
+      return;
+    }
     console.log({ cardHolderName, cardNumber, expiryDate });
     onClose(); // Close modal after submission
   };
@@ -45,7 +59,7 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50 p">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-[400px] h-auto max-w-full">
         <h2 className="text-lg font-bold mb-4">Add New Card</h2>
         <form onSubmit={handleSubmit}>
@@ -60,10 +74,17 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               type="text"
               id="name"
               value={cardHolderName}
-              onChange={(e) => setCardHolderName(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              onChange={handleCardHolderNameChange}
+              className={`mt-1 block w-full px-3 py-2 border ${
+                isCardHolderNameValid ? "border-gray-300" : "border-red-500"
+              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
               required
             />
+            {!isCardHolderNameValid && (
+              <p className="text-red-500 text-xs mt-1">
+                Card holder name is required.
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <label
@@ -104,7 +125,7 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             </button>
             <button
               onClick={onClose}
-              className=" px-4 py-2 text-black rounded border-[1px] border-black"
+              className="px-4 py-2 text-black rounded border-[1px] border-black"
             >
               Close
             </button>
