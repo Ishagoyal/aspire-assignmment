@@ -1,4 +1,10 @@
-import { Tab, Tabs } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Tab,
+  Tabs,
+} from "@mui/material";
 import { useState } from "react";
 
 import filledPlus from "../../assets/filledPlus.svg";
@@ -10,6 +16,14 @@ import spendLimit from "../../assets/spendLimit.svg";
 import gPay from "../../assets/gPay.svg";
 import replaceCard from "../../assets/replaceCard.svg";
 import deactivateCard from "../../assets/deactivateCard.svg";
+import cardDetails from "../../assets/cardDetails.svg";
+import recentTransactions from "../../assets/recentTransactions.svg";
+import fileStorage from "../../assets/fileStorage.svg";
+import next from "../../assets/next.svg";
+import card from "../../assets/card.svg";
+import flights from "../../assets/flights.svg";
+import megaphone from "../../assets/megaphone.svg";
+import DownArrowIcon from "../../assets/DownArrow";
 
 const renderHeader = () => {
   return (
@@ -35,6 +49,15 @@ const renderHeader = () => {
 };
 
 const renderTab1Content = () => {
+  const accordionStyle = {
+    backgroundColor: "#F5F9FF",
+    "&.MuiAccordion-root::before": {
+      background: "none",
+    },
+    "&.MuiAccordion-root": {
+      boxShadow: "none",
+    },
+  };
   return (
     <div className=" w-[906px] shadow-custom-gray rounded-lg overflow-hidden mt-4 p-[40px] pt-[31px]">
       <div className="flex flex-row justify-center">
@@ -43,77 +66,219 @@ const renderTab1Content = () => {
           Show card number
         </div>
       </div>
-      <div className="flex flex-col pt-3">
-        <div className="bg-active w-[414px] h-[248.85] rounded-xl p-[27px]">
-          <div className="flex justify-end">
-            <img src={aspireLogoWhite}></img>
-          </div>
-          <div className="text-white text-[24px] font-sans font-bold pt-[28px]">
-            Mark Henry
-          </div>
-          <div className="flex space-x-2 items-center pt-[27px]">
-            <div className="flex pr-[27px] space-x-2">
-              {" "}
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
+      <div className="flex flex-row">
+        <div className="flex flex-col pt-3">
+          <div className="flex flex-col ">
+            <div className="bg-active w-[414px] h-[248.85] rounded-xl p-[27px]">
+              <div className="flex justify-end">
+                <img src={aspireLogoWhite}></img>
+              </div>
+              <div className="text-white text-[24px] font-sans font-bold pt-[28px]">
+                Mark Henry
+              </div>
+              <div className="flex space-x-2 items-center pt-[27px]">
+                <div className="flex pr-[27px] space-x-2">
+                  {" "}
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div className="flex pr-[27px] space-x-2">
+                  {" "}
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div className="flex pr-[27px] space-x-2">
+                  {" "}
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div className="text-sm text-white font-bold">2020</div>
+              </div>
+              <div className="flex flex-row pt-[18px] items-center ">
+                <div className="text-[13px] text-white">Thru: 12/20</div>
+                <div className="flex justify-center items-center ml-10">
+                  <div className="text-[13px] text-white font-sans">{`CVV: `}</div>
+                  <div className="text-[24px] text-white ml-2">***</div>
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <img src={visaLogo}></img>
+              </div>
             </div>
-            <div className="flex pr-[27px] space-x-2">
-              {" "}
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-            </div>
-            <div className="flex pr-[27px] space-x-2">
-              {" "}
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-            </div>
-            <div className="text-sm text-white font-bold">2020</div>
-          </div>
-          <div className="flex flex-row pt-[18px] items-center ">
-            <div className="text-[13px] text-white">Thru: 12/20</div>
-            <div className="flex justify-center items-center ml-10">
-              <div className="text-[13px] text-white font-sans">{`CVV: `}</div>
-              <div className="text-[24px] text-white ml-2">***</div>
+            <div className="flex justify-center pt-4 space-x-2">
+              <div className="w-3 h-2 bg-active rounded-xl"></div>
+              <div className="w-2 h-2 bg-active rounded-full opacity-20"></div>
+              <div className="w-2 h-2 bg-active rounded-full opacity-20"></div>
             </div>
           </div>
-          <div className="flex justify-end">
-            <img src={visaLogo}></img>
+          <div className="bg-[#EDF3FF] rounded-xl px-8 py-5 mt-8 w-[414px] flex flex-row gap-8">
+            <div className="flex flex-col col-span-2 w-12 cursor-pointer">
+              <img src={freezeCard} className="h-8 w-8 flex self-center"></img>
+              <div className="text-[13px] pt-2 flex text-center">
+                Freeze card
+              </div>
+            </div>
+            <div className="flex flex-col col-span-2 w-12 cursor-pointer">
+              <img src={spendLimit} className="h-8 w-8 flex self-center"></img>
+              <div className="text-[13px] pt-2 flex text-center w-[63px]">
+                Set spend limit
+              </div>
+            </div>
+            <div className="flex flex-col col-span-2 w-12 cursor-pointer">
+              <img src={gPay} className="h-8 w-8 flex self-center"></img>
+              <div className="text-[13px] pt-2 flex text-center">
+                Add to GPay
+              </div>
+            </div>
+            <div className="flex flex-col col-span-2 w-12 cursor-pointer">
+              <img src={replaceCard} className="h-8 w-8 flex self-center"></img>
+              <div className="text-[13px] pt-2 flex text-center">
+                Replace card
+              </div>
+            </div>
+            <div className="flex flex-col col-span-2 w-12 cursor-pointer">
+              <img
+                src={deactivateCard}
+                className="h-8 w-8 flex self-center"
+              ></img>
+              <div className="text-[13px] pt-2 flex text-center">
+                Cancel card
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex justify-center pt-4 space-x-2 w-[50%]">
-          <div className="w-3 h-2 bg-active rounded-xl"></div>
-          <div className="w-2 h-2 bg-active rounded-full opacity-20"></div>
-          <div className="w-2 h-2 bg-active rounded-full opacity-20"></div>
-        </div>
-      </div>
-      <div className="bg-[#EDF3FF] rounded-xl px-8 py-5 mt-8 w-[414px] flex flex-row gap-8">
-        <div className="flex flex-col col-span-2 w-12 cursor-pointer">
-          <img src={freezeCard} className="h-8 w-8 flex self-center"></img>
-          <div className="text-[13px] pt-2 flex text-center">Freeze card</div>
-        </div>
-        <div className="flex flex-col col-span-2 w-12 cursor-pointer">
-          <img src={spendLimit} className="h-8 w-8 flex self-center"></img>
-          <div className="text-[13px] pt-2 flex text-center w-[63px]">
-            Set spend limit
-          </div>
-        </div>
-        <div className="flex flex-col col-span-2 w-12 cursor-pointer">
-          <img src={gPay} className="h-8 w-8 flex self-center"></img>
-          <div className="text-[13px] pt-2 flex text-center">Add to GPay</div>
-        </div>
-        <div className="flex flex-col col-span-2 w-12 cursor-pointer">
-          <img src={replaceCard} className="h-8 w-8 flex self-center"></img>
-          <div className="text-[13px] pt-2 flex text-center">Replace card</div>
-        </div>
-        <div className="flex flex-col col-span-2 w-12 cursor-pointer">
-          <img src={deactivateCard} className="h-8 w-8 flex self-center"></img>
-          <div className="text-[13px] pt-2 flex text-center">Cancel card</div>
+        <div className="flex flex-col gap-6 pt-3 ml-[46px]">
+          <Accordion
+            className="bg-[#F5F9FF] p-3 !shadow-custom-gray rounded-lg"
+            sx={accordionStyle}
+          >
+            <AccordionSummary expandIcon={<DownArrowIcon />} id="panel1-header">
+              <div className="flex content-center">
+                <img src={cardDetails}></img>
+                <div className="text-sm ml-3">Card details</div>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            className="bg-[#F5F9FF] p-3 !shadow-custom-gray rounded-lg"
+            sx={accordionStyle}
+          >
+            <AccordionSummary expandIcon={<DownArrowIcon />} id="panel1-header">
+              <div className="flex content-center">
+                <img src={recentTransactions}></img>
+                <div className="text-sm ml-3">Recent transactions</div>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className="flex flex-col gap-4">
+                <div className="flex border-b-[2px] border-[#F5F5F5] ">
+                  <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
+                    <img src={fileStorage}></img>
+                  </div>
+                  <div className="flex flex-col gap-1 ml-3">
+                    <div className="text-sm">Hamleys</div>
+                    <div className="text-[#AAAAAA] text-[13px]">
+                      20 May 2020
+                    </div>
+                    <div className="flex items-center justify-center mt-3 pb-4">
+                      <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
+                        <img src={card}></img>
+                      </div>
+                      <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
+                        Refund on debit card
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex ml-auto items-baseline">
+                    <div className="text-sm text-active font-bold">
+                      + S$ 150
+                    </div>
+                    <img src={next} className="ml-[10px]"></img>
+                  </div>
+                </div>
+                <div className="flex border-b-[2px] border-[#F5F5F5] ">
+                  <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
+                    <img src={flights}></img>
+                  </div>
+                  <div className="flex flex-col gap-1 ml-3">
+                    <div className="text-sm">Hamleys</div>
+                    <div className="text-[#AAAAAA] text-[13px]">
+                      20 May 2020
+                    </div>
+                    <div className="flex items-center justify-center mt-3 pb-4">
+                      <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
+                        <img src={card}></img>
+                      </div>
+                      <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
+                        Charged to debit card
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex ml-auto items-baseline">
+                    <div className="text-sm text-black font-bold">- S$ 150</div>
+                    <img src={next} className="ml-[10px]"></img>
+                  </div>
+                </div>
+                <div className="flex border-b-[2px] border-[#F5F5F5] ">
+                  <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
+                    <img src={megaphone}></img>
+                  </div>
+                  <div className="flex flex-col gap-1 ml-3">
+                    <div className="text-sm">Hamleys</div>
+                    <div className="text-[#AAAAAA] text-[13px]">
+                      20 May 2020
+                    </div>
+                    <div className="flex items-center justify-center mt-3 pb-4">
+                      <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
+                        <img src={card}></img>
+                      </div>
+                      <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
+                        Charged to debit card
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex ml-auto items-baseline">
+                    <div className="text-sm text-black font-bold">- S$ 150</div>
+                    <img src={next} className="ml-[10px]"></img>
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
+                    <img src={fileStorage}></img>
+                  </div>
+                  <div className="flex flex-col gap-1 ml-3">
+                    <div className="text-sm">Hamleys</div>
+                    <div className="text-[#AAAAAA] text-[13px]">
+                      20 May 2020
+                    </div>
+                    <div className="flex items-center justify-center mt-3 pb-4">
+                      <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
+                        <img src={card}></img>
+                      </div>
+                      <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
+                        Charged to debit card
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex ml-auto items-baseline">
+                    <div className="text-sm text-black font-bold">- S$ 150</div>
+                    <img src={next} className="ml-[10px]"></img>
+                  </div>
+                </div>
+              </div>
+            </AccordionDetails>
+          </Accordion>
         </div>
       </div>
     </div>
