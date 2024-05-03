@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import aspireLogo from "../../assets/aspireLogo.svg";
-import HomeIcon from "../../assets/HomeIcon";
-import PaymentsIcon from "../../assets/PaymentsIcon";
-import CardIcon from "../../assets/CardIcon";
-import CreditIcon from "../../assets/CreditIcon";
-import SettingsIcon from "../../assets/SettingsIcon";
+import aspireLogo from "../assets/aspireLogo.svg";
+import HomeIcon from "../assets/HomeIcon";
+import PaymentsIcon from "../assets/PaymentsIcon";
+import CardIcon from "../assets/CardIcon";
+import CreditIcon from "../assets/CreditIcon";
+import SettingsIcon from "../assets/SettingsIcon";
 
 export const sideBarArray = [
   {

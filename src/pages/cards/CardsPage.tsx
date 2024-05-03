@@ -24,8 +24,11 @@ import card from "../../assets/card.svg";
 import flights from "../../assets/flights.svg";
 import megaphone from "../../assets/megaphone.svg";
 import DownArrowIcon from "../../assets/DownArrow";
+import AddCardModal from "../../components/AddCardModal";
 
 const renderHeader = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
   return (
     <div>
       <div className="flex flex-row justify-between">
@@ -39,11 +42,15 @@ const renderHeader = () => {
             <span className="text-[26px] font-bold font-sans">3000</span>
           </div>
         </div>
-        <button className="flex flex-row items-center gap-2 bg-[#325BAF] h-fit py-2 px-3 self-end text-white font-bold">
+        <button
+          onClick={() => setModalOpen(true)}
+          className="flex flex-row items-center gap-2 bg-[#325BAF] h-fit py-2 px-3 self-end text-white font-bold"
+        >
           <img src={filledPlus}></img>
           <div>New Card</div>
         </button>
       </div>
+      <AddCardModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 };
