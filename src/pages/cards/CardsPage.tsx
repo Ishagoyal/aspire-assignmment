@@ -6,11 +6,10 @@ import {
   Tabs,
 } from "@mui/material";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import filledPlus from "../../assets/filledPlus.svg";
 import eye from "../../assets/eye.svg";
-import aspireLogoWhite from "../../assets/aspireLogoWhite.svg";
-import visaLogo from "../../assets/visaLogo.svg";
 import freezeCard from "../../assets/freezeCard.svg";
 import spendLimit from "../../assets/spendLimit.svg";
 import gPay from "../../assets/gPay.svg";
@@ -25,6 +24,8 @@ import flights from "../../assets/flights.svg";
 import megaphone from "../../assets/megaphone.svg";
 import DownArrowIcon from "../../assets/DownArrow";
 import AddCardModal from "../../components/AddCardModal";
+import { RootState } from "../../store";
+import CarouselCards from "../../components/CarouselCards/CarouselCards";
 
 const renderHeader = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -56,6 +57,8 @@ const renderHeader = () => {
 };
 
 const renderTab1Content = () => {
+  const cards = useSelector((state: RootState) => state.cards);
+
   const accordionStyle = {
     backgroundColor: "#F5F9FF",
     "&.MuiAccordion-root::before": {
@@ -65,6 +68,7 @@ const renderTab1Content = () => {
       boxShadow: "none",
     },
   };
+
   return (
     <div className=" w-[906px] shadow-custom-gray rounded-lg overflow-hidden mt-4 p-[40px] pt-[31px]">
       <div className="flex flex-row justify-center">
@@ -75,55 +79,7 @@ const renderTab1Content = () => {
       </div>
       <div className="flex flex-row">
         <div className="flex flex-col pt-3">
-          <div className="flex flex-col ">
-            <div className="bg-active w-[414px] h-[248.85] rounded-xl p-[27px]">
-              <div className="flex justify-end">
-                <img src={aspireLogoWhite}></img>
-              </div>
-              <div className="text-white text-[24px] font-sans font-bold pt-[28px]">
-                Mark Henry
-              </div>
-              <div className="flex space-x-2 items-center pt-[27px]">
-                <div className="flex pr-[27px] space-x-2">
-                  {" "}
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <div className="flex pr-[27px] space-x-2">
-                  {" "}
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <div className="flex pr-[27px] space-x-2">
-                  {" "}
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <div className="text-sm text-white font-bold">2020</div>
-              </div>
-              <div className="flex flex-row pt-[18px] items-center ">
-                <div className="text-[13px] text-white">Thru: 12/20</div>
-                <div className="flex justify-center items-center ml-10">
-                  <div className="text-[13px] text-white font-sans">{`CVV: `}</div>
-                  <div className="text-[24px] text-white ml-2">***</div>
-                </div>
-              </div>
-              <div className="flex justify-end">
-                <img src={visaLogo}></img>
-              </div>
-            </div>
-            <div className="flex justify-center pt-4 space-x-2">
-              <div className="w-3 h-2 bg-active rounded-xl"></div>
-              <div className="w-2 h-2 bg-active rounded-full opacity-20"></div>
-              <div className="w-2 h-2 bg-active rounded-full opacity-20"></div>
-            </div>
-          </div>
+          <CarouselCards />
           <div className="bg-[#EDF3FF] rounded-xl px-8 py-5 mt-8 w-[414px] flex flex-row gap-8">
             <div className="flex flex-col col-span-2 w-12 cursor-pointer">
               <img src={freezeCard} className="h-8 w-8 flex self-center"></img>
