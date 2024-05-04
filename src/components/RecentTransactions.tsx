@@ -45,7 +45,7 @@ const RecentTransactions: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 pt-3 ml-[46px]">
+    <div className="flex flex-col gap-6">
       <Accordion
         className="bg-[#F5F9FF] !shadow-custom-gray !rounded-lg"
         sx={accordionStyle}

@@ -22,8 +22,18 @@ const CarouselCards: React.FC = () => {
 
   const items = ["Item 1", "Item 2", "Item 3"];
 
+  const FourDots = () => {
+    return (
+      <>
+        <div className="w-2 h-2 bg-white rounded-full"></div>
+        <div className="w-2 h-2 bg-white rounded-full"></div>
+        <div className="w-2 h-2 bg-white rounded-full"></div>
+        <div className="w-2 h-2 bg-white rounded-full"></div>
+      </>
+    );
+  };
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col gap-4">
       <Carousel
         className="carousel-container"
         showStatus={false}
@@ -33,31 +43,26 @@ const CarouselCards: React.FC = () => {
         swipeable={false}
         showArrows={false}
         showThumbs={false}
-        width={414}
       >
         {cards.map((card) => {
           const lastFourDigits = card.cardNumber.replace(/\s/g, "").slice(-4);
           return (
             <div
-              className={`bg-active w-[414px] h-[248.85] rounded-xl p-[27px] ${
+              className={`bg-active rounded-xl p-7 flex flex-col ${
                 card.status === "frozen" ? "opacity-30" : ""
               }`}
               key={card.id}
             >
-              <div className="flex justify-end">
+              <div className="flex justify-end mb-7">
                 <img src={aspireLogoWhite}></img>
               </div>
-              <div className="text-white text-[24px] font-sans font-bold pt-[28px]">
+              <div className="text-white text-[24px] font-sans font-bold mb-7">
                 {card.cardHolderName}
               </div>
-              <div className="flex space-x-2 items-center pt-[27px]">
+              <div className="flex flex-row gap-7 items-center mb-5">
                 {items.map(() => (
-                  <div className="flex pr-[27px] space-x-2">
-                    {" "}
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="flex space-x-2">
+                    <FourDots />
                   </div>
                 ))}
 
@@ -65,9 +70,9 @@ const CarouselCards: React.FC = () => {
                   {lastFourDigits}
                 </div>
               </div>
-              <div className="flex flex-row pt-[18px] items-center ">
+              <div className="flex flex-row items-center mb-1 gap-10">
                 <div className="text-[13px] text-white">{card.expiryDate}</div>
-                <div className="flex justify-center items-center ml-10">
+                <div className="flex justify-center items-center">
                   <span className="text-[13px] text-white font-sans self-center leading-[24px]">{`CVV: `}</span>
                   <div className="ml-2 h-full w-full flex items-center flex-row pt-2">
                     <span className="text-[24px] text-white h-fit !leading-none ">
@@ -83,7 +88,7 @@ const CarouselCards: React.FC = () => {
           );
         })}
       </Carousel>
-      <div className="flex justify-center space-x-2 pt-4">
+      <div className="flex justify-center space-x-2 ">
         {cards.map((_card, index) => {
           const isActive = selectedSlide === index;
           return isActive ? (

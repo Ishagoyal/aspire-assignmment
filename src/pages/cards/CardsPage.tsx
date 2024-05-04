@@ -1,19 +1,17 @@
 import { Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
-
 import filledPlus from "../../assets/filledPlus.svg";
-
 import AddCardModal from "../../components/AddCardModal";
-import CardActions from "../../components/CardActions";
 import { getCards } from "../../apis/mockApi";
 import { useDispatch } from "react-redux";
 import { setCards } from "../../state/cardSlice";
+import CardSection from "../../components/CardSection";
 
 const renderHeader = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
-    <div>
+    <>
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-2">
           <span className="text-[13px]">Available Balance</span>
@@ -34,7 +32,7 @@ const renderHeader = () => {
         </button>
       </div>
       <AddCardModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
-    </div>
+    </>
   );
 };
 
@@ -84,44 +82,45 @@ function Cards() {
         hidden={value !== index}
         id={`simple-tabpanel-${index}`}
         {...other}
+        className={`w-full shadow-custom-gray rounded-lg overflow-hidden p-10 pt-8 flex flex-row gap-12 ${
+          value !== index ? "hidden" : ""
+        }`}
       >
-        {value === index && <div>{children}</div>}
+        {value === index && <>{children}</>}
       </div>
     );
   }
 
   return (
-    <div className="p-[60px]">
-      <div>{renderHeader()}</div>
-      <div className="pt-[34px]">
-        <div className="pt-[34px]">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            sx={{
-              "& .MuiTabs-indicator": {
-                backgroundColor: "#23CEFD",
-              },
-            }}
-          >
-            <Tab
-              label="My debit cards"
-              className="!pl-0 focus:outline-none "
-              sx={value === 0 ? activeTabStyle : inactiveTabStyle}
-            />
-            <Tab
-              label="All company cards"
-              className="!pl-0 focus:outline-none"
-              sx={value === 1 ? activeTabStyle : inactiveTabStyle}
-            />
-          </Tabs>
-          <CustomTabPanel value={value} index={0}>
-            <CardActions />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={1}>
-            Item Two
-          </CustomTabPanel>
-        </div>
+    <div className="flex flex-col gap-9">
+      {renderHeader()}
+      <div className="flex flex-col gap-4">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          sx={{
+            "& .MuiTabs-indicator": {
+              backgroundColor: "#23CEFD",
+            },
+          }}
+        >
+          <Tab
+            label="My debit cards"
+            className="!pl-0 focus:outline-none "
+            sx={value === 0 ? activeTabStyle : inactiveTabStyle}
+          />
+          <Tab
+            label="All company cards"
+            className="!pl-0 focus:outline-none"
+            sx={value === 1 ? activeTabStyle : inactiveTabStyle}
+          />
+        </Tabs>
+        <CustomTabPanel value={value} index={0}>
+          <CardSection />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          Item Two
+        </CustomTabPanel>
       </div>
     </div>
   );
