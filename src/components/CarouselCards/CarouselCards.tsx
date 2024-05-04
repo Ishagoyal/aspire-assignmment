@@ -30,6 +30,7 @@ const CarouselCards = () => {
         onChange={handleSlideChange}
         swipeable={false}
         showArrows={false}
+        showThumbs={false}
         width={414}
       >
         {cards.map((card) => {
@@ -91,7 +92,7 @@ const CarouselCards = () => {
           );
         })}
       </Carousel>
-      <div className="flex justify-center space-x-2">
+      <div className="flex justify-center space-x-2 pt-4">
         {cards.map((_card, index) => {
           const isActive = selectedSlide === index;
           return isActive ? (

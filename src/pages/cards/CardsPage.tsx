@@ -1,10 +1,13 @@
 import { Tab, Tabs } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import filledPlus from "../../assets/filledPlus.svg";
 
 import AddCardModal from "../../components/AddCardModal";
 import CardActions from "../../components/CardActions";
+import { getCards } from "../../apis/mockApi";
+import { useDispatch } from "react-redux";
+import { setCards } from "../../state/cardSlice";
 
 const renderHeader = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -59,9 +62,18 @@ function Cards() {
   };
 
   const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    event.preventDefault();
     setValue(newValue);
   };
+
+  useEffect(() => {
+    getCards().then((data: any) => {
+      dispatch(setCards(data));
+    });
+  }, []);
 
   function CustomTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
