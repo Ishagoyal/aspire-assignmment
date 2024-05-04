@@ -11,8 +11,10 @@ export interface Card {
    
    export interface Transaction {
     id: number;
+    name: string
     date: string;
     description: string;
+    type: string;
     amount: string;
     icon: string;
    }

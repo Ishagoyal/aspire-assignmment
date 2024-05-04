@@ -1,12 +1,5 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 import filledPlus from "../../assets/filledPlus.svg";
 import eye from "../../assets/eye.svg";
@@ -15,17 +8,9 @@ import spendLimit from "../../assets/spendLimit.svg";
 import gPay from "../../assets/gPay.svg";
 import replaceCard from "../../assets/replaceCard.svg";
 import deactivateCard from "../../assets/deactivateCard.svg";
-import cardDetails from "../../assets/cardDetails.svg";
-import recentTransactions from "../../assets/recentTransactions.svg";
-import fileStorage from "../../assets/fileStorage.svg";
-import next from "../../assets/next.svg";
-import card from "../../assets/card.svg";
-import flights from "../../assets/flights.svg";
-import megaphone from "../../assets/megaphone.svg";
-import DownArrowIcon from "../../assets/DownArrow";
 import AddCardModal from "../../components/AddCardModal";
-import { RootState } from "../../store";
 import CarouselCards from "../../components/CarouselCards/CarouselCards";
+import RecentTransactions from "../../components/RecentTransactions";
 
 const renderHeader = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -56,19 +41,8 @@ const renderHeader = () => {
   );
 };
 
+
 const renderTab1Content = () => {
-  const cards = useSelector((state: RootState) => state.cards);
-
-  const accordionStyle = {
-    backgroundColor: "#F5F9FF",
-    "&.MuiAccordion-root::before": {
-      background: "none",
-    },
-    "&.MuiAccordion-root": {
-      boxShadow: "none",
-    },
-  };
-
   return (
     <div className=" w-[906px] shadow-custom-gray rounded-lg overflow-hidden mt-4 p-[40px] pt-[31px]">
       <div className="flex flex-row justify-center">
@@ -116,154 +90,7 @@ const renderTab1Content = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-6 pt-3 ml-[46px]">
-          <Accordion
-            className="bg-[#F5F9FF] !shadow-custom-gray !rounded-lg"
-            sx={accordionStyle}
-          >
-            <AccordionSummary
-              expandIcon={<DownArrowIcon />}
-              id="panel1-header"
-              className="border-b-[1px] rounded-b-lg"
-            >
-              <div className="flex content-center p-4">
-                <img src={cardDetails}></img>
-                <div className="text-sm ml-3">Card details</div>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails className="!p-0">
-              <div className="px-8 py-3 border-t-[1px] border-[#F5F5F5] bg-white rounded-b-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </div>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            className="bg-[#F5F9FF] !shadow-custom-gray !rounded-lg"
-            sx={accordionStyle}
-          >
-            <AccordionSummary
-              expandIcon={<DownArrowIcon />}
-              id="panel1-header"
-              className="border-b-[1px] rounded-b-lg"
-            >
-              <div className="flex content-center p-4">
-                <img src={recentTransactions}></img>
-                <div className="text-sm ml-3">Recent transactions</div>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails className="!p-0">
-              <div className="flex flex-col">
-                <div className="flex flex-col gap-4 px-6 bg-white">
-                  <div className="flex border-b-[2px] border-[#F5F5F5] pt-4 ">
-                    <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
-                      <img src={fileStorage}></img>
-                    </div>
-                    <div className="flex flex-col gap-1 ml-3">
-                      <div className="text-sm">Hamleys</div>
-                      <div className="text-[#AAAAAA] text-[13px]">
-                        20 May 2020
-                      </div>
-                      <div className="flex items-center justify-center mt-3 pb-4">
-                        <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
-                          <img src={card}></img>
-                        </div>
-                        <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
-                          Refund on debit card
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex ml-auto items-baseline">
-                      <div className="text-sm text-active font-bold">
-                        + S$ 150
-                      </div>
-                      <img src={next} className="ml-[10px]"></img>
-                    </div>
-                  </div>
-                  <div className="flex border-b-[2px] border-[#F5F5F5] ">
-                    <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
-                      <img src={flights}></img>
-                    </div>
-                    <div className="flex flex-col gap-1 ml-3">
-                      <div className="text-sm">Hamleys</div>
-                      <div className="text-[#AAAAAA] text-[13px]">
-                        20 May 2020
-                      </div>
-                      <div className="flex items-center justify-center mt-3 pb-4">
-                        <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
-                          <img src={card}></img>
-                        </div>
-                        <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
-                          Charged to debit card
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex ml-auto items-baseline">
-                      <div className="text-sm text-black font-bold">
-                        - S$ 150
-                      </div>
-                      <img src={next} className="ml-[10px]"></img>
-                    </div>
-                  </div>
-                  <div className="flex border-b-[2px] border-[#F5F5F5] ">
-                    <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
-                      <img src={megaphone}></img>
-                    </div>
-                    <div className="flex flex-col gap-1 ml-3">
-                      <div className="text-sm">Hamleys</div>
-                      <div className="text-[#AAAAAA] text-[13px]">
-                        20 May 2020
-                      </div>
-                      <div className="flex items-center justify-center mt-3 pb-4">
-                        <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
-                          <img src={card}></img>
-                        </div>
-                        <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
-                          Charged to debit card
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex ml-auto items-baseline">
-                      <div className="text-sm text-black font-bold">
-                        - S$ 150
-                      </div>
-                      <img src={next} className="ml-[10px]"></img>
-                    </div>
-                  </div>
-                  <div className="flex">
-                    <div className="w-12 h-12 rounded-full bg-[#009DFF1A] flex flex-row items-center justify-center">
-                      <img src={fileStorage}></img>
-                    </div>
-                    <div className="flex flex-col gap-1 ml-3">
-                      <div className="text-sm">Hamleys</div>
-                      <div className="text-[#AAAAAA] text-[13px]">
-                        20 May 2020
-                      </div>
-                      <div className="flex items-center justify-center mt-3 pb-4">
-                        <div className="w-6 h-5 rounded-full bg-[#325BAF] flex flex-row items-center justify-center">
-                          <img src={card}></img>
-                        </div>
-                        <div className="text-[#325BAF] text-[12px] font-semibold ml-2">
-                          Charged to debit card
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex ml-auto items-baseline">
-                      <div className="text-sm text-black font-bold">
-                        - S$ 150
-                      </div>
-                      <img src={next} className="ml-[10px]"></img>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-[#EDFFF5] text-active text-[13px] font-semibold flex justify-center rounded-b-lg !border-[1px] !border-b-[#DDFFEC] py-4 text-center">
-                  View all card transactions
-                </div>
-              </div>
-            </AccordionDetails>
-          </Accordion>
-        </div>
+        <RecentTransactions />
       </div>
     </div>
   );

@@ -29,12 +29,16 @@ const CarouselCards = () => {
         selectedItem={selectedSlide}
         onChange={handleSlideChange}
         swipeable={false}
+        showArrows={false}
         width={414}
       >
         {cards.map((card) => {
           const lastFourDigits = card.cardNumber.replace(/\s/g, "").slice(-4);
           return (
-            <div className="bg-active w-[414px] h-[248.85] rounded-xl p-[27px]">
+            <div
+              className="bg-active w-[414px] h-[248.85] rounded-xl p-[27px]"
+              key={card.id}
+            >
               <div className="flex justify-end">
                 <img src={aspireLogoWhite}></img>
               </div>
