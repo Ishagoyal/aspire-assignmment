@@ -76,8 +76,12 @@ const CarouselCards = () => {
               <div className="flex flex-row pt-[18px] items-center ">
                 <div className="text-[13px] text-white">{card.expiryDate}</div>
                 <div className="flex justify-center items-center ml-10">
-                  <div className="text-[13px] text-white font-sans">{`CVV: `}</div>
-                  <div className="text-[24px] text-white ml-2">***</div>
+                  <span className="text-[13px] text-white font-sans self-center leading-[24px]">{`CVV: `}</span>
+                  <div className="ml-2 h-full w-full flex items-center flex-row pt-2">
+                    <span className="text-[24px] text-white h-fit !leading-none ">
+                      ***
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="flex justify-end">
