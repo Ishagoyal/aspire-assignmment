@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addCard } from "../state/cardSlice";
 
 const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
@@ -8,7 +10,7 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [isCardHolderNameValid, setIsCardHolderNameValid] = useState(true);
-
+  const dispatch = useDispatch();
   // Function to generate random card number
   const generateCardNumber = () => {
     return (
@@ -54,6 +56,59 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     }
     console.log({ cardHolderName, cardNumber, expiryDate });
     onClose(); // Close modal after submission
+  };
+
+  const handleAddCard = () => {
+    dispatch(
+      addCard({
+        id: 1,
+        cardHolderName: cardHolderName,
+        cardNumber: cardNumber,
+        status: "active",
+        cardType: "Visa",
+        expiryDate: expiryDate,
+        cvv: "***",
+        availableBalance: 3000,
+        transactions: [
+          {
+            id: 1,
+            name: "Hamleys",
+            date: "20 May 2020",
+            description: "Refund on debit card",
+            amount: "+ S$ 150",
+            type: "credited",
+            icon: "fileStorage",
+          },
+          {
+            id: 2,
+            name: "Hamleys",
+            date: "20 May 2020",
+            description: "Charged to debit card",
+            amount: "- S$ 150",
+            type: "debited",
+            icon: "flights",
+          },
+          {
+            id: 3,
+            name: "Hamleys",
+            date: "20 May 2020",
+            description: "Charged to debit card",
+            amount: "- S$ 150",
+            type: "debited",
+            icon: "megaphone",
+          },
+          {
+            id: 4,
+            name: "Hamleys",
+            date: "20 May 2020",
+            description: "Charged to debit card",
+            amount: "- S$ 150",
+            type: "debited",
+            icon: "fileStorage",
+          },
+        ],
+      })
+    );
   };
 
   if (!isOpen) return null;
@@ -120,6 +175,7 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             <button
               type="submit"
               className="px-4 py-2 bg-[#325BAF] text-white rounded hover:bg-blue-700"
+              onClick={() => handleAddCard()}
             >
               Add Card
             </button>

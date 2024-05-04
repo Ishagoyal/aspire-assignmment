@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Card, CardState } from '../types/cardTypes';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 
 const initialState: CardState = [
@@ -7,6 +9,7 @@ const initialState: CardState = [
        id: 1,
        cardHolderName: "Mark Henry",
        cardNumber: "1234 5678 9012 2020",
+       status: 'active',
        cardType: "Visa",
        expiryDate: "12/20",
        cvv: "***",
@@ -54,6 +57,7 @@ const initialState: CardState = [
         id: 2,
         cardHolderName: "Mark Henry",
         cardNumber: "1234 5678 9012 2020",
+        status: 'frozen',
         cardType: "Visa",
         expiryDate: "12/20",
         cvv: "***",
@@ -107,9 +111,15 @@ const cardSlice = createSlice({
     addCard: (state, action: PayloadAction<Card>) => {
       state.push(action.payload);
     },
+    updateCardStatus: (state, action: PayloadAction<{ cardId: number; newStatus: string }>) => {
+        const card = state.find(card => card.id === action.payload.cardId);
+        if (card) {
+          card.status = action.payload.newStatus; // Immer allows this "mutation"
+        }
+      },
  },
 });
 
-export const { addCard } = cardSlice.actions;
+export const { addCard, updateCardStatus } = cardSlice.actions;
 
 export default cardSlice.reducer;

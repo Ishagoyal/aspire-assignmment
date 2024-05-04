@@ -2,6 +2,7 @@ export interface Card {
     id: number;
     cardHolderName: string;
     cardNumber: string;
+    status:string;
     cardType: string;
     expiryDate: string;
     cvv: string;
