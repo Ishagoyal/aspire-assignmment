@@ -9,9 +9,10 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   const [cardHolderName, setCardHolderName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
-  const [isCardHolderNameValid, setIsCardHolderNameValid] = useState(true);
+  const [isCardHolderNameValid, setIsCardHolderNameValid] = useState(false);
   const dispatch = useDispatch();
   // Function to generate random card number
+
   const generateCardNumber = () => {
     return (
       "XXXX-XXXX-XXXX-" +
@@ -54,11 +55,6 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
       // Prevent form submission if the card holder name is not valid
       return;
     }
-    console.log({ cardHolderName, cardNumber, expiryDate });
-    onClose(); // Close modal after submission
-  };
-
-  const handleAddCard = () => {
     dispatch(
       addCard({
         id: 1,
@@ -109,7 +105,15 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
         ],
       })
     );
+    setCardHolderName("");
+    onClose(); // Close modal after submission
   };
+
+  useEffect(() => {
+    if (cardHolderName === "") {
+      setIsCardHolderNameValid(false);
+    }
+  }, [cardHolderName]);
 
   if (!isOpen) return null;
 
@@ -171,19 +175,21 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="px-4 py-2 bg-[#325BAF] text-white rounded hover:bg-blue-700"
-              onClick={() => handleAddCard()}
-            >
-              Add Card
-            </button>
+          <div className="flex justify-end gap-4">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-black rounded border-[1px] border-black"
+              className="px-4 py-2 text-gray-500 rounded border-[1px] border-gray-500"
             >
               Close
+            </button>
+            <button
+              type="submit"
+              className={`px-4 py-2 bg-[#325BAF] text-white rounded ${
+                !isCardHolderNameValid ? "opacity-20" : ""
+              }`}
+              disabled={!isCardHolderNameValid}
+            >
+              Add Card
             </button>
           </div>
         </form>
