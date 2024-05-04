@@ -10,13 +10,14 @@ import megaphone from "../assets/megaphone.svg";
 import DownArrowIcon from "../assets/DownArrow";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { CardState } from "../types/cardTypes";
 
 const RecentTransactions: React.FC = () => {
   const selectedSlide = useSelector(
     (state: RootState) => state.carousel.selectedSlide
   );
 
-  const cards = useSelector((state: RootState) => state.cards);
+  const cards: CardState = useSelector((state: RootState) => state.cards);
 
   const selectedCard = cards[selectedSlide];
 

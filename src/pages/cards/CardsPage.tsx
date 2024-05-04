@@ -98,7 +98,11 @@ function Cards() {
           <Tabs
             value={value}
             onChange={handleChange}
-            indicatorColor={"#23CEFD"}
+            sx={{
+              "& .MuiTabs-indicator": {
+                backgroundColor: "#23CEFD",
+              },
+            }}
           >
             <Tab
               label="My debit cards"

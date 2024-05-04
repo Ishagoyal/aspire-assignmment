@@ -9,14 +9,13 @@ import spendLimit from "../assets/spendLimit.svg";
 import gPay from "../assets/gPay.svg";
 import replaceCard from "../assets/replaceCard.svg";
 import deactivateCard from "../assets/deactivateCard.svg";
+import { CardState } from "../types/cardTypes";
 
-function CardActions() {
-  const selectedSlide = useSelector(
+const CardActions: React.FC = () => {
+  const selectedSlide: number = useSelector(
     (state: RootState) => state.carousel.selectedSlide
   );
-
-  const cards = useSelector((state: RootState) => state.cards);
-
+  const cards: CardState = useSelector((state: RootState) => state.cards);
   const selectedCard = cards[selectedSlide];
   const dispatch = useDispatch();
 
@@ -81,6 +80,6 @@ function CardActions() {
       </div>
     </div>
   );
-}
+};
 
 export default CardActions;

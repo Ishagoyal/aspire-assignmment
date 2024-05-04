@@ -1,18 +1,21 @@
-// carouselSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
- selectedSlide: 0,
+interface CarouselState {
+  selectedSlide: number;
+}
+
+const initialState: CarouselState = {
+  selectedSlide: 0,
 };
 
 const carouselSlice = createSlice({
- name: 'carousel',
- initialState,
- reducers: {
-    setSelectedSlide: (state, action) => {
+  name: "carousel",
+  initialState,
+  reducers: {
+    setSelectedSlide: (state, action: PayloadAction<number>) => {
       state.selectedSlide = action.payload;
     },
- },
+  },
 });
 
 export const { setSelectedSlide } = carouselSlice.actions;

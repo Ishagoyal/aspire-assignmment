@@ -9,7 +9,7 @@ import visaLogo from "../../assets/visaLogo.svg";
 import "../CarouselCards/CarouselCards.css";
 import { setSelectedSlide } from "../../state/carouselSlice";
 
-const CarouselCards = () => {
+const CarouselCards: React.FC = () => {
   const cards: CardState = useSelector((state: RootState) => state.cards);
   const selectedSlide = useSelector(
     (state: RootState) => state.carousel.selectedSlide
