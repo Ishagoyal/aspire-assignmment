@@ -20,6 +20,8 @@ const CarouselCards: React.FC = () => {
     dispatch(setSelectedSlide(index));
   };
 
+  const items = ["Item 1", "Item 2", "Item 3"];
+
   return (
     <div className="flex flex-col ">
       <Carousel
@@ -49,27 +51,16 @@ const CarouselCards: React.FC = () => {
                 {card.cardHolderName}
               </div>
               <div className="flex space-x-2 items-center pt-[27px]">
-                <div className="flex pr-[27px] space-x-2">
-                  {" "}
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <div className="flex pr-[27px] space-x-2">
-                  {" "}
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <div className="flex pr-[27px] space-x-2">
-                  {" "}
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
+                {items.map(() => (
+                  <div className="flex pr-[27px] space-x-2">
+                    {" "}
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                ))}
+
                 <div className="text-sm text-white font-bold">
                   {lastFourDigits}
                 </div>
