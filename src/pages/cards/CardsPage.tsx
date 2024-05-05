@@ -1,11 +1,12 @@
 import { Tab, Tabs } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import filledPlus from "../../assets/filledPlus.svg";
 import AddCardModal from "../../components/AddCardModal";
 import { getCards } from "../../apis/mockApi";
 import { useDispatch } from "react-redux";
 import { setCards } from "../../state/cardSlice";
 import CardSection from "../../components/CardSection";
+import useDevice from "../../hooks/useDevice";
 
 const renderHeader = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -67,6 +68,21 @@ function Cards() {
     setValue(newValue);
   };
 
+  const currentDeviceType = useDevice();
+
+  const mediaClassesPanel = useMemo(() => {
+    let classes = "";
+    switch (currentDeviceType) {
+      case "tablet":
+        classes = "gap-8 p-8 pt-6";
+        break;
+      case "laptop":
+        classes = "";
+        break;
+    }
+    return classes;
+  }, [currentDeviceType]);
+
   useEffect(() => {
     getCards().then((data: any) => {
       dispatch(setCards(data));
@@ -84,7 +100,7 @@ function Cards() {
         {...other}
         className={`w-full shadow-custom-gray rounded-lg overflow-hidden p-10 pt-8 flex flex-row gap-12 ${
           value !== index ? "hidden" : ""
-        }`}
+        } ${mediaClassesPanel}`}
       >
         {value === index && <>{children}</>}
       </div>

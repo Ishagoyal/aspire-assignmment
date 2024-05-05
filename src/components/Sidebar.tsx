@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import aspireLogo from "../assets/aspireLogo.svg";
@@ -7,6 +7,7 @@ import PaymentsIcon from "../assets/PaymentsIcon";
 import CardIcon from "../assets/CardIcon";
 import CreditIcon from "../assets/CreditIcon";
 import SettingsIcon from "../assets/SettingsIcon";
+import useDevice from "../hooks/useDevice";
 
 export const sideBarArray = [
   {
@@ -45,6 +46,37 @@ const Sidebar: React.FC = () => {
   const [activeTab, setActiveTab] = useState("home");
   const location = useLocation();
   const navigate = useNavigate();
+  const currentDeviceType = useDevice();
+
+  const mediaClassesListItemText = useMemo(() => {
+    let classes = "";
+    switch (currentDeviceType) {
+      case "tablet":
+        classes = "hidden";
+        break;
+    }
+    return classes;
+  }, [currentDeviceType]);
+
+  const mediaClassesDescription = useMemo(() => {
+    let classes = "";
+    switch (currentDeviceType) {
+      case "tablet":
+        classes = "hidden";
+        break;
+    }
+    return classes;
+  }, [currentDeviceType]);
+
+  const mediaClassesListItem = useMemo(() => {
+    let classes = "";
+    switch (currentDeviceType) {
+      case "tablet":
+        classes = "!pl-6";
+        break;
+    }
+    return classes;
+  }, [currentDeviceType]);
 
   useEffect(() => {
     navigate(`${location.pathname}`);
@@ -60,7 +92,9 @@ const Sidebar: React.FC = () => {
         <div className="w-1/2">
           <img src={aspireLogo} className="logo" />
         </div>
-        <div className="font-sans text-white opacity-30 text-[15px]">
+        <div
+          className={`font-sans text-white opacity-30 text-[15px] ${mediaClassesDescription}  `}
+        >
           Trusted way of banking for 3,000+ SMEs and startups in Singapore
         </div>
       </div>
@@ -79,7 +113,7 @@ const Sidebar: React.FC = () => {
             onClick={() => setActiveTab(sidebarContent.id)}
           >
             <ListItem
-              className={`text-base flex align-baseline hover:bg-[#009DFF1A] hover:cursor-pointer !pl-12`}
+              className={`text-base flex align-baseline hover:bg-[#009DFF1A] hover:cursor-pointer !pl-12 ${mediaClassesListItem}`}
             >
               <ListItemIcon className="">
                 {React.cloneElement(sidebarContent.icon, {
@@ -93,7 +127,7 @@ const Sidebar: React.FC = () => {
                   activeTab === sidebarContent.id
                     ? "text-active !font-bold"
                     : "text-white"
-                }`}
+                } ${mediaClassesListItemText}`}
               />
             </ListItem>
           </NavLink>

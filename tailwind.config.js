@@ -22,8 +22,8 @@ export default {
       laptop: { max: "1535px" },
       // => @media (max-width: 1535px) { ... }
 
-      tablet: { max: "1024px" },
-      // => @media (max-width: 1024px) { ... }
+      tablet: { max: "1200px" },
+      // => @media (max-width: 1200px) { ... }
 
       mobile: { max: "767px" },
       // => @media (max-width: 767px) { ... }
