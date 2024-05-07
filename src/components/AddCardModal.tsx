@@ -10,6 +10,7 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [isCardHolderNameValid, setIsCardHolderNameValid] = useState(false);
+
   const dispatch = useDispatch();
   // Function to generate random card number
 
@@ -49,6 +50,10 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     setIsCardHolderNameValid(value.trim() !== "");
   };
 
+  function generateRandomId() {
+    return Math.random() + Date.now();
+  }
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (!isCardHolderNameValid) {
@@ -57,11 +62,12 @@ const AddCardModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     }
     dispatch(
       addCard({
-        id: 1,
+        id: generateRandomId(),
         cardHolderName: cardHolderName,
         cardNumber: cardNumber,
         status: "active",
         cardType: "Visa",
+        cardNumberVisible: false,
         expiryDate: expiryDate,
         cvv: "***",
         availableBalance: 3000,

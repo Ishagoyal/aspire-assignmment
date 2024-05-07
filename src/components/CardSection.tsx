@@ -2,7 +2,7 @@ import CarouselCards from "./CarouselCards/CarouselCards";
 import RecentTransactions from "./RecentTransactions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
-import { updateCardStatus } from "../state/cardSlice";
+import { toggleCardVisibility, updateCardStatus } from "../state/cardSlice";
 import eye from "../assets/eye.svg";
 import freezeCard from "../assets/freezeCard.svg";
 import spendLimit from "../assets/spendLimit.svg";
@@ -17,11 +17,17 @@ const CardSection: React.FC = () => {
   );
   const cards: CardState = useSelector((state: RootState) => state.cards);
   const selectedCard = cards[selectedSlide];
+
   const dispatch = useDispatch();
 
   const handleFreezeCard = (cardId: number) => {
     const newStatus = selectedCard.status === "active" ? "frozen" : "active";
     dispatch(updateCardStatus({ cardId, newStatus }));
+  };
+
+  const handleShowCardNumber = (cardId: number) => {
+    const cardNumberVisible = !selectedCard.cardNumberVisible;
+    dispatch(toggleCardVisibility({ cardId, cardNumberVisible }));
   };
 
   const CartActions = () => {
@@ -68,10 +74,15 @@ const CardSection: React.FC = () => {
     <>
       <div className="flex flex-col gap-8 w-[48%]">
         <div className="flex flex-col gap-3">
-          <div className="self-end flex flex-row">
+          <div
+            className="self-end flex flex-row cursor-pointer"
+            onClick={() => handleShowCardNumber(selectedCard.id)}
+          >
             <img src={eye}></img>
             <div className="text-active font-bold text-[12px] ml-2">
-              Show card number
+              {selectedCard.cardNumberVisible
+                ? "Hide Card Number"
+                : "Show card number"}
             </div>
           </div>
           <CarouselCards />

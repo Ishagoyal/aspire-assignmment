@@ -20,6 +20,8 @@ const CarouselCards: React.FC = () => {
     dispatch(setSelectedSlide(index));
   };
 
+  const selectedCard = cards[selectedSlide];
+
   const items = ["Item 1", "Item 2", "Item 3"];
 
   const FourDots = () => {
@@ -59,17 +61,22 @@ const CarouselCards: React.FC = () => {
               <div className="text-white text-[24px] font-sans font-bold mb-7">
                 {card.cardHolderName}
               </div>
-              <div className="flex flex-row gap-7 items-center mb-5">
-                {items.map(() => (
-                  <div className="flex space-x-2">
-                    <FourDots />
-                  </div>
-                ))}
+              {selectedCard.cardNumberVisible ? (
+                <div className="flex">{card.cardNumber}</div>
+              ) : (
+                <div className="flex flex-row gap-7 items-center mb-5">
+                  {items.map(() => (
+                    <div className="flex space-x-2">
+                      <FourDots />
+                    </div>
+                  ))}
 
-                <div className="text-sm text-white font-bold">
-                  {lastFourDigits}
+                  <div className="text-sm text-white font-bold">
+                    {lastFourDigits}
+                  </div>
                 </div>
-              </div>
+              )}
+
               <div className="flex flex-row items-center mb-1 gap-10">
                 <div className="text-[13px] text-white">{card.expiryDate}</div>
                 <div className="flex justify-center items-center">

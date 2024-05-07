@@ -11,6 +11,7 @@ const initialState: CardState = [
     expiryDate: "12/20",
     cvv: "***",
     availableBalance: 3000,
+    cardNumberVisible: false,
     transactions: [
       {
         id: 1,
@@ -71,9 +72,19 @@ const cardSlice = createSlice({
         card.status = action.payload.newStatus; // Immer allows this "mutation"
       }
     },
+    toggleCardVisibility: (
+      state,
+      action: PayloadAction<{ cardId: number; cardNumberVisible: boolean }>
+    ) => {
+      const card = state.find((card) => card.id === action.payload.cardId);
+      if (card) {
+        card.cardNumberVisible = action.payload.cardNumberVisible; // Immer allows this "mutation"
+      }
+    },
   },
 });
 
-export const { addCard, updateCardStatus, setCards } = cardSlice.actions;
+export const { addCard, updateCardStatus, setCards, toggleCardVisibility } =
+  cardSlice.actions;
 
 export default cardSlice.reducer;
